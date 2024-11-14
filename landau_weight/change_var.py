@@ -40,21 +40,17 @@ def change_variables(rp, tp, pp, ru, tu, pu):
     tq = theta(q[0], q[1], q[2]) 
     pq = phi(q[0], q[1])
 
-    return [rq, tq, pq]
+    return rq, tq, pq
 
 # main function
 def main():
-    k = 2
-    l = 2
-    m = -2
-
     rp = 4
     tp = np.pi/6
     pp = np.pi/3
 
     ru = 1
-    tu = np.pi/3
-    pu = np.pi/6
+    tu = np.pi/6
+    pu = np.pi/3
 
     print("q coordinates:")
     print(change_variables(rp, tp, pp, ru, tu, pu))
