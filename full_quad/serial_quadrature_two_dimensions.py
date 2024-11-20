@@ -45,8 +45,8 @@ with open('../special_quad/special_quad.pkl', 'rb') as file:
     special_quadrature = pickle.load(file)
 
 # print it
-# print("Special quadrature: ")
-# print(special_quadrature)
+print("Special quadrature: ")
+print(special_quadrature)
 
 '''
 choose the integration order here
@@ -67,8 +67,8 @@ for point, weight in zip(x, w_r):
     # append
     lag.append([new_point, new_weight])
 
-# print("Radial integration: ")
-# print(lag)
+print("Radial integration: ")
+print(lag)
 
 # build library
 leblib = PyLebedev()
@@ -77,78 +77,51 @@ leb = []
 for p, w in zip(s,w_spher):
     leb.append([p, np.pi*4*w])
 
-# print("Spherical integration:")
-# print(leb)
+print("Spherical integration:")
+print(leb)
 
 
 '''
 Tensorize these
 '''
-# empty list
+# tensorized = [[(x, y) for y in lag] for x in leb]
 tensorized = []
-# iterate
 for radial in lag:
-    for ang_p in leb:
-        for ang_u in leb:
-            for special in special_quadrature:
-                tensorized.append([radial, ang_p, special, ang_u])
-'''
-for radial in lag:
-    for ang_p in leb:
-        for ang_u in leb:
-            for radial_u in lag:
-                tensorized.append([radial, ang_p, radial_u, ang_u])
-
-'''
-# print()
-# print("tensorized: ")
-# print(tensorized)
+    for ang in leb:
+        tensorized.append([radial, ang])
+print()
+print("tensorized: ")
+print(tensorized)
 
 '''
 Test the function
 '''
-# test functions
-def f(r, t, p):
-    return 
-def g(r, t, p):
-    return r
+# test function
+def to_integrate_test(r, t, p):
+    return 1
 
 # numerical integration
 partial_sum = 0
 for quad in tensorized:
     # radial quadrature
-    r_p = quad[0][0]
-    w_p = quad[0][1]
+    radial_point  = quad[0][0]
+    radial_weight = quad[0][1]
+    print("radial quadrature")
+    print(radial_point, radial_weight)
 
     # angular quadrature
-    ang_p   =  quad[1][0]
-    ang_w_p = quad[1][1]
-
-    # special radial quadrature
-    r_u = quad[2][0]
-    w_u = quad[2][1]
-    print("special quadrature")
-    print(r_u)
-    print(w_u)
-    print()
-
-    # angular quadrature for u
-    ang_u   = quad[3][0]
-    ang_w_u = quad[3][1] 
+    angular_point   = quad[1][0]
+    angular_weight  = quad[1][1]
+    print("angular quadrature")
+    print(angular_point, angular_weight)
 
     # cartesian quadrature point on the sphere
-    x_p = ang_p[0]
-    y_p = ang_p[1]
-    z_p = ang_p[2]
-
-    x_u = ang_u[0]
-    y_u = ang_u[1]
-    z_u = ang_u[2]
+    r = radial_point
+    x = angular_point[0]
+    y = angular_point[1]
+    z = angular_point[2]
 
     # perform the partial sum
-    f1 = f(r_p, theta(x_p, y_p, z_p), phi(x_p, y_p))
-    f2 = g(r_u, theta(x_u, y_u, z_u), phi(x_u, y_u))
-
-    partial_sum = partial_sum + (w_p*ang_w_p)*(w_u*ang_w_u)*f1*f2
+    partial_sum = partial_sum + angular_weight*radial_weight*to_integrate_test(r, theta(x, y, z), phi(x, y))
 
 print(partial_sum)
