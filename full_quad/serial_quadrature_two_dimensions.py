@@ -74,8 +74,14 @@ print(lag)
 leblib = PyLebedev()
 s,w_spher = leblib.get_points_and_weights(n_lebedev)
 leb = []
+sum = 0
 for p, w in zip(s,w_spher):
     leb.append([p, np.pi*4*w])
+    x = p[0]
+    y = p[1]
+    z = p[2]
+    sum = sum + w*(np.sin(theta(x, y, z)))
+
 
 print("Spherical integration:")
 print(leb)
@@ -86,7 +92,7 @@ Tensorize these
 '''
 # tensorized = [[(x, y) for y in lag] for x in leb]
 tensorized = []
-for radial in lag:
+for radial in special_quadrature:
     for ang in leb:
         tensorized.append([radial, ang])
 print()
@@ -98,7 +104,7 @@ Test the function
 '''
 # test function
 def to_integrate_test(r, t, p):
-    return 1
+    return r**3*(r*np.cos(t))**2
 
 # numerical integration
 partial_sum = 0
@@ -125,3 +131,4 @@ for quad in tensorized:
     partial_sum = partial_sum + angular_weight*radial_weight*to_integrate_test(r, theta(x, y, z), phi(x, y))
 
 print(partial_sum)
+print(4*np.pi*sum*(np.pi/2)**(1/2))

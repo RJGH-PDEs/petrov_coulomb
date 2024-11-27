@@ -1,4 +1,5 @@
 import pickle
+import numpy as np
 from unpack_quad import unpack_quadrature
 
 # open quadrature
@@ -9,7 +10,7 @@ with open('quadrature.pkl', 'rb') as file:
 def f(r, t, p): # integrand in p
     return 1
 def g(r, t, p): # integrand in u
-    return r
+    return r**3*(r*np.cos(t))**2
 
 # numerical integration
 sum = 0
