@@ -1,3 +1,3 @@
 # function to integrate 
 def h(r):
-    return r
+    return r**3
