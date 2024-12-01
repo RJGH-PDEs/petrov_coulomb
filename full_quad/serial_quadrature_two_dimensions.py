@@ -62,8 +62,8 @@ for point, weight in zip(x, w_r):
     '''
     we change variables 
     '''
-    new_point  = np.sqrt(2 * point)
-    new_weight = np.sqrt(2)*weight
+    new_point  = np.sqrt(point) # note that this is different from the previous case
+    new_weight = weight/2
     # append
     lag.append([new_point, new_weight])
 

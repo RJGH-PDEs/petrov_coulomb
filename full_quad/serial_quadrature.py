@@ -95,8 +95,8 @@ with open('../special_quad/special_quad.pkl', 'rb') as file:
 '''
 choose the integration order here
 '''
-n_laguerre = 3
-n_lebedev = 5
+n_laguerre = 5
+n_lebedev = 7
 
 # extract the coefficients
 alpha = 1/2
@@ -106,8 +106,8 @@ for point, weight in zip(x, w_r):
     '''
     we change variables 
     '''
-    new_point  = np.sqrt(2 * point)
-    new_weight = np.sqrt(2)*weight
+    new_point  = np.sqrt(point)
+    new_weight = weight/2
     # append
     lag.append([new_point, new_weight])
 
