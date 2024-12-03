@@ -37,10 +37,10 @@ print(sum)
 # The Landau Operator
 def operator(select, l, m, u, gradient, proj, hess):
     # open quadrature
-    with open('quadrature.pkl', 'rb') as file:
+    with open('../full_quad/quadrature.pkl', 'rb') as file:
         quadrature = pickle.load(file)
 
-    print(len(quadrature))
+    print("quadrature length: ", len(quadrature))
 
     # numerical integration
     sum = 0
@@ -51,6 +51,7 @@ def operator(select, l, m, u, gradient, proj, hess):
         sample = integrand(select, l, m, u, gradient, proj, hess, r_p, t_p, p_p, r_u, t_u, p_u)
         # update sum
         sum = sum + weight*sample
+        # print(sum)
 
     return sum
 
@@ -58,8 +59,8 @@ def operator(select, l, m, u, gradient, proj, hess):
 def main():
     # parameters for the weight
     k = 2
-    l = 0
-    m = 0
+    l = 1
+    m = 1
 
     # produce the weight pieces
     u, gradient, proj, hess = weight_new(k, l, m)
@@ -80,6 +81,7 @@ def main():
     start_time = time.time()
 
     # compute the operator
+    print('selection: ', k, m, l)
     print(operator(select, l, m, u, gradient, proj, hess))
 
     # Record the end time
