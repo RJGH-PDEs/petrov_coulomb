@@ -95,8 +95,8 @@ with open('../special_quad/special_quad.pkl', 'rb') as file:
 '''
 choose the integration order here
 '''
-n_laguerre = 5
-n_lebedev = 7
+n_laguerre = 3
+n_lebedev = 5
 
 # extract the coefficients
 alpha = 1/2

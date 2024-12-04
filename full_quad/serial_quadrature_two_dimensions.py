@@ -92,7 +92,7 @@ Tensorize these
 '''
 # tensorized = [[(x, y) for y in lag] for x in leb]
 tensorized = []
-for radial in special_quadrature:
+for radial in lag:
     for ang in leb:
         tensorized.append([radial, ang])
 print()
@@ -104,7 +104,7 @@ Test the function
 '''
 # test function
 def to_integrate_test(r, t, p):
-    return r**3*(r*np.cos(t))**2
+    return np.exp(r*np.sin(t)*np.cos(p))*(r*np.sin(t)*np.cos(p))
 
 # numerical integration
 partial_sum = 0
@@ -131,4 +131,4 @@ for quad in tensorized:
     partial_sum = partial_sum + angular_weight*radial_weight*to_integrate_test(r, theta(x, y, z), phi(x, y))
 
 print(partial_sum)
-print(4*np.pi*sum*(np.pi/2)**(1/2))
+# print(4*np.pi*sum*(np.pi/2)**(1/2))

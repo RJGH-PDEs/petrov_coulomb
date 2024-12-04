@@ -1,3 +1,4 @@
+# imports
 import pickle
 import numpy as np
 import time 
@@ -8,31 +9,7 @@ from integrand import integrand
 # import to produce the weight pieces
 from derivatives import weight_new
 
-
-'''
-# open quadrature
-with open('quadrature.pkl', 'rb') as file:
-    quadrature = pickle.load(file)
-
-# test functions
-def f(r, t, p): # integrand in p
-    return 1
-def g(r, t, p): # integrand in u
-    return r**3
-
-# numerical integration
-sum = 0
-for q in quadrature:
-    # unpack quadrature 
-    weight, r_p, t_p, p_p, r_u, t_u, p_u = unpack_quadrature(q)
-    # sample the function
-    sample = f(r_p, t_p, p_p)*g(r_u, t_u, p_p)
-    # update sum
-    sum = sum + weight*sample
-
-# print result
-print(sum)
-'''
+# loads the quadrature
 def load_quad():
     with open('../full_quad/quadrature.pkl', 'rb') as file:
         data = pickle.load(file)
@@ -40,12 +17,6 @@ def load_quad():
 
 # The Landau Operator
 def operator(select, l, m, u, gradient, proj, hess, quadrature):
-    '''
-    # open quadrature
-    with open('../full_quad/quadrature.pkl', 'rb') as file:
-        quadrature = pickle.load(file)
-    '''
-
     # numerical integration
     sum = 0
     for q in quadrature:
@@ -55,10 +26,32 @@ def operator(select, l, m, u, gradient, proj, hess, quadrature):
         sample = integrand(select, l, m, u, gradient, proj, hess, r_p, t_p, p_p, r_u, t_u, p_u)
         # update sum
         sum = sum + weight*sample
-        # print(sum)
 
     return sum
 
+# version of the operator that will be used for parallelization
+def operator_parallel(select, shared):
+    '''
+    upack the shared data
+    ''' 
+    # quadrature 
+    quadrature  = shared[0]
+    # pieces from the weight
+    u           = shared[1]
+    gradient    = shared[2]
+    proj        = shared[3]
+    hess        = shared[4] 
+    # test function (for the weight)
+    l           = shared[5]
+    m           = shared[6] 
+    
+    # compute the Landau operator
+    result = operator(select, l, m, u, gradient, proj, hess, quadrature)
+    # print the results and return it
+    print('Select: ', select, ', RESULT: ', result)
+    return result
+
+# operator
 def operator_test(weight_param, quad):
     print("starting job for weight: ", weight_param)
 
