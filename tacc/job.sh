@@ -14,4 +14,4 @@
 
 conda init
 conda activate petrov_env
-python3 parallel.py
+python3 ../parallel/parallel.py
