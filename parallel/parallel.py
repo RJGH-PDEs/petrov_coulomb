@@ -41,7 +41,7 @@ def trial_iterator(data, r):
         # Use starmap to pass the shared data to each worker
         results = pool.starmap(operator_parallel, [(select, shared_data) for select in params])
 
-    r. append(results)
+    r.append(results)
 
 # produce collision matrix
 def weight_iteration(n, r):
