@@ -68,6 +68,10 @@ def weight_iteration(n, r):
                 trial_iterator(sd, r)
                 end = time.time()
 
+                # save the partial result
+                with open('../results/operator.pkl', 'wb') as file:
+                    pickle.dump(r, file)
+
                 # Calculate elapsed time
                 elapsed_time = end - start
                 print(f"Elapsed time: {elapsed_time:.6f} seconds") 

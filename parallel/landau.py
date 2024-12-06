@@ -19,7 +19,6 @@ def load_quad():
 def operator(select, l, m, u, gradient, proj, hess, quadrature):
     # numerical integration
     sum = 0
-
     for q in quadrature:
         # unpack quadrature 
         weight, r_p, t_p, p_p, r_u, t_u, p_u = unpack_quadrature(q)
