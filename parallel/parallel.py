@@ -1,6 +1,7 @@
 import multiprocessing
 import os
 import time
+import pickle
 
 # import pieces from operator
 from landau import load_quad, operator_parallel
@@ -75,7 +76,7 @@ def weight_iteration(n, r):
 # main function
 if __name__ == "__main__":
     # select the degrees of freedom
-    n = 2
+    n = 3
 
     # results to be stored here
     r = []
@@ -85,3 +86,7 @@ if __name__ == "__main__":
 
     # print the result
     print(r)
+
+    # save the result
+    with open('../results/operator.pkl', 'wb') as file:
+        pickle.dump(r, file)
