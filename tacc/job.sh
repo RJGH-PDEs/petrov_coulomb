@@ -2,11 +2,11 @@
 
 #SBATCH -N 1
 #SBATCH -n 128
-#SBATCH -o coulumb_teset.%j.out
+#SBATCH -o coulumb_test.%j.out
 #SBATCH -J coulumb_test
 #SBATCH -p normal
 #SBATCH -A DMS23021
-#SBATCH -t 5:00:00
+#SBATCH -t 23:50:00
 
 #SBATCH --mail-user=rodrigogonzalez@utexas.edu
 #SBATCH --mail-type=begin
