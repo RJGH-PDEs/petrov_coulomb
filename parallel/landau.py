@@ -42,14 +42,16 @@ def operator_parallel(select, shared):
     proj        = shared[3]
     hess        = shared[4] 
     # test function (for the weight)
-    l           = shared[5]
-    m           = shared[6] 
+    k           = shared[5]
+    l           = shared[6]
+    m           = shared[7] 
     
     # compute the Landau operator
     result = operator(select, l, m, u, gradient, proj, hess, quadrature)
-    # print the results and return it
+    # print the results
     print('Select: ', select, ', RESULT: ', result)
-    return result
+    # return results with all the information
+    return [[k,l,m], select, result]
 
 # operator
 def operator_test(weight_param, quad):

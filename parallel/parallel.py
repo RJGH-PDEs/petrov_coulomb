@@ -60,7 +60,7 @@ def weight_iteration(n, r):
                 u, g, p, h = weight_new(k, l, m)
 
                 # package shared data (sd)
-                sd = [quad, u, g, p, h, l, m]
+                sd = [quad, u, g, p, h, k, l, m]
                 
                 # compute it and time it
                 start = time.time()
