@@ -1,0 +1,15 @@
+no change     /home1/09611/rodrigojosegonzalez/miniconda3/envs/petrov_env/condabin/conda
+no change     /home1/09611/rodrigojosegonzalez/miniconda3/envs/petrov_env/bin/conda
+no change     /home1/09611/rodrigojosegonzalez/miniconda3/envs/petrov_env/bin/conda-env
+no change     /home1/09611/rodrigojosegonzalez/miniconda3/envs/petrov_env/bin/activate
+no change     /home1/09611/rodrigojosegonzalez/miniconda3/envs/petrov_env/bin/deactivate
+no change     /home1/09611/rodrigojosegonzalez/miniconda3/envs/petrov_env/etc/profile.d/conda.sh
+no change     /home1/09611/rodrigojosegonzalez/miniconda3/envs/petrov_env/etc/fish/conf.d/conda.fish
+no change     /home1/09611/rodrigojosegonzalez/miniconda3/envs/petrov_env/shell/condabin/Conda.psm1
+no change     /home1/09611/rodrigojosegonzalez/miniconda3/envs/petrov_env/shell/condabin/conda-hook.ps1
+no change     /home1/09611/rodrigojosegonzalez/miniconda3/envs/petrov_env/lib/python3.12/site-packages/xontrib/conda.xsh
+no change     /home1/09611/rodrigojosegonzalez/miniconda3/envs/petrov_env/etc/profile.d/conda.csh
+no change     /home1/09611/rodrigojosegonzalez/.bashrc
+No action taken.
+quadrature size:  14700
+slurmstepd: error: *** JOB 2095329 ON c308-015 CANCELLED AT 2024-12-11T08:17:31 DUE TO TIME LIMIT ***
