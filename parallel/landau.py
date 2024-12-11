@@ -53,32 +53,27 @@ def operator_parallel(select, shared):
     # return results with all the information
     return [[k,l,m], select, result]
 
-# operator
-def operator_test(weight_param, quad):
-    print("starting job for weight: ", weight_param)
 
+# used to recompute the 
+def operator_recompute(param, quad):
+    # recompute
+    recomputed = operator_test(param[0], param[1], param[2], quad)
+    # return
+    print()
+    return [param[0], param[1], param[2], recomputed]
+
+# operator_test
+def operator_test(weight_param, select, old_result, quad):
     # unpack the choice of parameters
     k = weight_param[0]
     l = weight_param[1]
     m = weight_param[2]
-    
-    # produce the weight pieces
-    u, gradient, proj, hess = weight_new(k, l, m)
-
-    # select the test functions
-    kp = 0
-    lp = 0
-    mp = 0
-
-    kq = 1
-    lq = 0
-    mq = 0
-
-    # package on a vector
-    select = [kp, lp, mp, kq, lq, mq]
 
     # Record the start time
     start_time = time.time()
+    
+    # produce the weight pieces
+    u, gradient, proj, hess = weight_new(k, l, m)
 
     # compute the operator
     result = operator(select, l, m, u, gradient, proj, hess, quad)
@@ -89,7 +84,7 @@ def operator_test(weight_param, quad):
     # Calculate the elapsed time
     elapsed_time = end_time - start_time
 
-    print('selection: ', k, m, l, ', RESULT: ', result, ', time ', elapsed_time)
+    print('selection: ', weight_param, ' select: ', select,  ' old result: ', old_result, ', RESULT: ', result, ', time ', elapsed_time)
     return result
 
 # The main function
