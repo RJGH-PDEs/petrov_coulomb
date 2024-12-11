@@ -2,9 +2,16 @@ import pickle
 import numpy as np
 
 # Loading the data
-with open('operator.pkl', 'rb') as file:
+with open('recomputed.pkl', 'rb') as file:
     loaded_data = pickle.load(file)
 
+print(len(loaded_data[0]))
+
+for slice in loaded_data:
+    for element in slice:
+        print(element)
+
+'''
 # Find the location of the non-zeros
 non_zeros = []
 counter = 0
@@ -23,7 +30,6 @@ with open('non_zeros.pkl', 'wb') as file:
     pickle.dump(non_zeros, file)
     print("data has been saved")
 
-'''
 counter = 0
 slice = loaded_data[26]
 for d in slice:
