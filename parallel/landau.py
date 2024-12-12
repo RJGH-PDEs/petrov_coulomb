@@ -8,7 +8,7 @@ from unpack_quad import unpack_quadrature
 from integrand import integrand
 # import to produce the weight pieces
 from derivatives import weight_new
-
+from to_numpy import to_numpy
 # loads the quadrature
 def load_quad():
     with open('../full_quad/quadrature.pkl', 'rb') as file:
@@ -94,7 +94,7 @@ def main():
     l = 1
     m = 1
     param = [k, l, m]
-
+    select = [0, 0, 0, 0, 0, 0]
     # load the quadrature
     quad = load_quad()
 
@@ -102,7 +102,7 @@ def main():
     print("quadrature length: ", len(quad))
 
     # test the operator
-    operator_test(param, quad)
+    operator_test(param, select, -2, quad)
 
     
    

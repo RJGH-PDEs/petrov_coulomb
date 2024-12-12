@@ -7,7 +7,7 @@ import time
 from derivatives import weight_new
 from derivatives import spher_const
 
-def to_numpy(weight_param):
+def to_numpy(k, l, m):
     # symbols
     r = sp.symbols('r')
     t = sp.symbols('t')
@@ -20,11 +20,6 @@ def to_numpy(weight_param):
     rq = sp.symbols('rq')
     tq = sp.symbols('tq')
     pq = sp.symbols('pq')
- 
-    # unpack the choice of parameters
-    k = weight_param[0]
-    l = weight_param[1]
-    m = weight_param[2]
     
     # produce the weight pieces
     u, gradient, proj, hess = weight_new(k, l, m)
@@ -57,19 +52,7 @@ def to_numpy(weight_param):
     return u_np, grad_np, p_np, hess_np
 
 # weight evaluator
-def weight_evaluator_numpy(weight_param, u, grad, projection, hessian, pt):
-    
-    # unpack weight parameters
-    l = weight_param[1]
-    m = weight_param[2]
-    # evaluation point 
-    rp = pt[0]
-    tp = pt[1]
-    pp = pt[2]
-    rq = pt[3]
-    tq = pt[4]
-    pq = pt[5]
-    
+def weight_evaluator_numpy(l, m, u, grad, projection, hessian, rp, tp, pp, rq, tq, pq):
     # grad difference 
     gradDiff = np.ravel(grad(rp, tp, pp) - grad(rq, tq, pq))
     # relative position
@@ -94,9 +77,8 @@ def main():
     k = 2
     l = 2
     m = -2
-    weight = [k, l, m]
 
-    u_np, grad_np, p_np, hess_np = to_numpy(weight)
+    u_np, grad_np, p_np, hess_np = to_numpy(k, l, m)
     
     a = 4
     b = np.pi/6
@@ -106,11 +88,8 @@ def main():
     e = np.pi/3
     f = np.pi/6
 
-    point = [a, b, c, d, e, f]
-
-
     tic = time.time()
-    s = weight_evaluator_numpy(weight, u_np, grad_np, p_np, hess_np, point)
+    s = weight_evaluator_numpy(l, m, u_np, grad_np, p_np, hess_np, a, b, c, d, e, f)
     toc = time.time()
     print("time ", toc - tic)
     print("result: ", s)

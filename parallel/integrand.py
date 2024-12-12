@@ -1,6 +1,6 @@
 import numpy as np
 # import weight elements
-from weight_evaluator import weight_evaluator_u
+from weight_evaluator import weight_evaluator_u, np_weight_evaluator_u
 from derivatives import weight_new
 # import change of variables
 from change_var import change_variables
