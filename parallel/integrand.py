@@ -44,18 +44,19 @@ def inner_product(rp, tp, pp, ru, tu, pu):
 
 # the integrand
 def integrand(select, l, m, u, gradient, proj, hess, rp, tp, pp, ru, tu, pu):
-    # evaluate the weight
-    result = weight_evaluator_u(l, m, u, gradient, proj, hess, rp, tp, pp, ru, tu, pu)
-    
-    # mixed exponential
-    result = result*np.exp(inner_product(rp, tp, pp, ru, tu, pu))
-    
+    # evaluate the weight (sympy)
+    # result = weight_evaluator_u(l, m, u, gradient, proj, hess, rp, tp, pp, ru, tu, pu)
+    # evaluate the weight (numpy)
+    result = np_weight_evaluator_u(l, m, u, gradient, proj, hess, rp, tp, pp, ru, tu, pu)
+   
     '''
     Now we need to compute the basis functions,
     one at p, the other at p - u, i.e. at q, which
     means that i need to compute q first
     '''
-
+    # mixed exponential
+    result = result*np.exp(inner_product(rp, tp, pp, ru, tu, pu))
+    
     # compute the change of variables
     rq, tq, pq = change_variables(rp, tp, pp, ru, tu, pu)
 

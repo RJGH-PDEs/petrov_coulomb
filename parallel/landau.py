@@ -8,7 +8,8 @@ from unpack_quad import unpack_quadrature
 from integrand import integrand
 # import to produce the weight pieces
 from derivatives import weight_new
-from to_numpy import to_numpy
+from to_numpy import to_numpy, pieces_to_numpy
+
 # loads the quadrature
 def load_quad():
     with open('../full_quad/quadrature.pkl', 'rb') as file:
@@ -31,6 +32,8 @@ def operator(select, l, m, u, gradient, proj, hess, quadrature):
 
 # version of the operator that will be used for parallelization
 def operator_parallel(select, shared):
+    # initial time
+    it = time.time()
     '''
     upack the shared data
     ''' 
@@ -47,9 +50,13 @@ def operator_parallel(select, shared):
     m           = shared[7] 
     
     # compute the Landau operator
+    u, gradient, proj, hess = pieces_to_numpy(u, gradient, proj, hess)
     result = operator(select, l, m, u, gradient, proj, hess, quadrature)
+    # final time
+    ft = time.time()
     # print the results
-    print('Select: ', select, ', RESULT: ', result)
+    print('Select: ', select, ', RESULT: ', result, ' time: ', ft - it)
+
     # return results with all the information
     return [[k,l,m], select, result]
 
