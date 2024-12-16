@@ -56,6 +56,32 @@ def to_numpy(weight_param):
     '''
     return u_np, grad_np, p_np, hess_np
 
+# given the pieces in sympy, convert them to numpy
+def pieces_to_numpy(u, gradient, proj, hess):
+    # symbols
+    r = sp.symbols('r')
+    t = sp.symbols('t')
+    p = sp.symbols('p')
+    # more symbols
+    rp = sp.symbols('rp')
+    tp = sp.symbols('tp')
+    pp = sp.symbols('pp')
+
+    rq = sp.symbols('rq')
+    tq = sp.symbols('tq')
+    pq = sp.symbols('pq')
+ 
+    # gradient and hessian
+    grad_np = sp.lambdify([r, t, p], gradient, "numpy")
+    hess_np = sp.lambdify([r, t, p], hess, "numpy")
+
+    # relative position and projection
+    u_np = sp.lambdify([rp, tp, pp, rq, tq, pq], u, "numpy")
+    p_np = sp.lambdify([rp, tp, pp, rq, tq, pq], proj, "numpy")
+
+    # return the pieces
+    return u_np, grad_np, p_np, hess_np
+
 # weight evaluator
 def weight_evaluator_numpy(weight_param, u, grad, projection, hessian, pt):
     
