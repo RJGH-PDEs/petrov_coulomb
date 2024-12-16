@@ -7,6 +7,7 @@ import pickle
 from landau import load_quad, operator_parallel
 # import to produce the weight pieces
 from derivatives import weight_new 
+# import to numpy
 
 
 # create iterable
@@ -44,7 +45,7 @@ def trial_iterator(data, r):
     r.append(results)
 
 # produce collision matrix
-def weight_iteration(n, r):
+def weight_iteration(n, r, fr):
     # Load data once 
     quad = load_quad()
     print("quadrature size: ", len(quad))
@@ -69,7 +70,7 @@ def weight_iteration(n, r):
                 end = time.time()
 
                 # save the partial result
-                with open('../results/operator.pkl', 'wb') as file:
+                with open(fr, 'wb') as file:
                     pickle.dump(r, file)
 
                 # Calculate elapsed time
@@ -82,15 +83,19 @@ if __name__ == "__main__":
     # select the degrees of freedom
     n = 3
 
+    # where to save result:
+    file_result = '../results/operator_numpy.pkl'
+    
     # results to be stored here
     r = []
 
     # compute the tensor
-    weight_iteration(n, r)
+    weight_iteration(n, r, file_result)
 
     # print the result
     print(r)
 
+    
     # save the result
-    with open('../results/operator.pkl', 'wb') as file:
+    with open(file_result, 'wb') as file:
         pickle.dump(r, file)
