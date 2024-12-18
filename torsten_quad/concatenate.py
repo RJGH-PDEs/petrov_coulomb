@@ -39,7 +39,7 @@ def f(x):
     return h(x)*(1-x)/x # hopefully the integration weights will never include 0, otherwise this will be undefined
 
 # Number of Gauss points
-n = 5
+n = 9
 
 # Get Gauss-Legendre points (nodes) and weights
 nodes, weights = np.polynomial.legendre.leggauss(n)

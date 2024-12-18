@@ -85,7 +85,7 @@ collision operator in the Coulumb interaction
 '''
 
 # open the special quadrature
-with open('../special_quad/special_quad.pkl', 'rb') as file:
+with open('../torsten_quad/special_quad.pkl', 'rb') as file:
     special_quadrature = pickle.load(file)
 
 # print it
@@ -95,8 +95,8 @@ with open('../special_quad/special_quad.pkl', 'rb') as file:
 '''
 choose the integration order here
 '''
-n_laguerre = 3
-n_lebedev = 5
+n_laguerre = 5
+n_lebedev = 7
 
 # extract the coefficients
 alpha = 1/2
