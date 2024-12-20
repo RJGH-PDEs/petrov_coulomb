@@ -95,8 +95,8 @@ with open('../torsten_quad/special_quad.pkl', 'rb') as file:
 '''
 choose the integration order here
 '''
-n_laguerre = 5
-n_lebedev = 7
+n_laguerre = 6
+n_lebedev = 9
 
 # extract the coefficients
 alpha = 1/2
