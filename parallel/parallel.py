@@ -1,5 +1,4 @@
 import multiprocessing
-import os
 import time
 import pickle
 
@@ -84,7 +83,7 @@ if __name__ == "__main__":
     n = 3
 
     # where to save result:
-    file_result = '../results/operator_1069.pkl'
+    file_result = '../results/operator_12811.pkl'
     
     # results to be stored here
     r = []
