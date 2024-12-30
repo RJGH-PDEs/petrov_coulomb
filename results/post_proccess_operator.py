@@ -15,20 +15,33 @@ tol = 1
 count = 0
 # will store all the differences
 difference = []
+
+# iterate over all the entries 
 i = 0
 for slice in old_computation:
     j = 0
     for d in slice:
-        difference.append(d[2] - new_computation[i][j][2])
-        discrepancie = d[2] - new_computation[i][j][2]
-        if np.abs(discrepancie) > tol:
-            # print(discrepancie)
-            count = count + 1
+        # compute the difference
+        old = d[2]
+        new = new_computation[i][j][2]
+        diff = old - new
+
+        if np.abs(diff) > tol and np.abs(old) > 0.1:
+            # compute the percentage difference
+            percent = 100*diff/d[2]
+
+            if np.abs(percent) > 10:
+                # print('old: ', d[2], ' new: ', new_computation[i][j][2], ' percent: ', percent)
+                print(d, new_computation[i][j])
+                # store it
+                difference.append(percent)
+                count = count + 1
+
         j = j + 1
 
     i = i + 1
 
-print("max difference: ", np.max(np.abs(difference)))
+print("median difference: ", np.median(np.abs(difference)))
 print("number where discrepancie is big: ", count)
 
 '''
