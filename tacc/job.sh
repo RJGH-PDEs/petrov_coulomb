@@ -2,8 +2,8 @@
 
 #SBATCH -N 1
 #SBATCH -n 128
-#SBATCH -o coulumb_12811.%j.out
-#SBATCH -J coulumb_12811
+#SBATCH -o coulumb_13913.%j.out
+#SBATCH -J coulumb_13913
 #SBATCH -p normal
 #SBATCH -A DMS23021
 #SBATCH -t 33:00:00
