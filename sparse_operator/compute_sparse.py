@@ -25,7 +25,7 @@ def load_operator(name):
 # save operator 
 def save_sparse_op(name, operator):
     with open(name, 'wb') as file:
-        pickle.dump(name, file)
+        pickle.dump(operator, file)
 
 # extracts non-zero entries
 def non_zeros(operator, tol):
@@ -40,7 +40,9 @@ def non_zeros(operator, tol):
             if np.abs(data[2]) > tol:
                 nz.append(data)    
                 # print(data[2]) 
-    
+
+    # print the number of non-zeros
+    print('Number of non-zeros: ', len(nz))
     return nz 
 
 # now just one list with simplified indeces
@@ -83,7 +85,12 @@ def dense_op(si, n):
         val = element[1][3] 
         
         # insert
-        dense[t][p][u] = val
+        # dense[t][p][u] = val
+        '''
+        NOTE: multiply by -1 to
+        correct mistake from before
+        '''
+        dense[t][p][u] = (-1)*val
         
     return dense
 
@@ -101,9 +108,9 @@ def sparse_op(do):
 def main():
     n = 3
     L = n - 1 # max value l can take?
-    tol = 0.1 # tolerance for the nonzeros
+    tol = 0.03 # tolerance for the nonzeros
 
-    file_name = "../results/operator_1069.pkl"
+    file_name = "../results/operator_13913.pkl"
     
     op = load_operator(file_name)   # operator pkl
     nz = non_zeros(op, tol)         # non zeros
@@ -111,12 +118,16 @@ def main():
     do = dense_op(si, n)            # dense operator
     so = sparse_op(do)              # sparse operator
     
+    # compute the size of the sparse operator
+    print('sparse operator length: ', len(so))
+
     # show the number of non-zeros
+    print('number of non-zeros per matrix: ')
     for slice in so:
         print(slice.nnz)
     
     # save it 
-    sparse_name = "sparse_operator.pkl" 
+    sparse_name = "sparse_operator_13913.pkl" 
     save_sparse_op(sparse_name, so)
 
     return 0
