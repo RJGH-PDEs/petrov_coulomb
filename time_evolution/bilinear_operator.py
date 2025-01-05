@@ -13,7 +13,6 @@ def landau(sparse_op, f, result):
     for sm in sparse_op:
         # compute the rayleigh form
         r = f @ (sm.dot(f))
-        # r = (-1)*r
         # print("matrix ", sm.nnz)
         # print("result: ", r)
         

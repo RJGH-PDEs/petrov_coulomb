@@ -85,13 +85,12 @@ def dense_op(si, n):
         val = element[1][3] 
         
         # insert
-        # dense[t][p][u] = val
+        dense[t][p][u] = val
         '''
         NOTE: multiply by -1 to
         correct mistake from before
-        '''
         dense[t][p][u] = (-1)*val
-        
+        '''
     return dense
 
 

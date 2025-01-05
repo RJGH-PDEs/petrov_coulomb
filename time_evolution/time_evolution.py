@@ -7,10 +7,10 @@ from bilinear_operator import update
 tau = 0.0000001
 
 # number of iterations
-NUM_ITERATIONS = 500000
+NUM_ITERATIONS = 5000000
 
 # indicates if the the result is saved
-save = False
+save = True
 
 # open mass matrix and operator tensor
 with open('mass_inverse.pkl', 'rb') as file:

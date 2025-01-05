@@ -4,7 +4,7 @@ from lc import linear_comb
 import pickle
 
 # flag to save the figure
-save = False
+save = True
 
 # generate cartesian points
 n = 100
@@ -66,7 +66,7 @@ f = np.zeros(n)
 # coeff[9] = -0.6
 
 # open the result
-time = 500000 
+time = 5000000
 file_name = "coeff/" + str(time) + ".pkl"
 # file_name = "1.pkl"
 
