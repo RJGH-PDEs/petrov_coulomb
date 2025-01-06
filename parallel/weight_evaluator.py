@@ -14,14 +14,13 @@ def weight_evaluator_u(l, m, u, grad, projection, hessian, rp, tp, pp, ru, tu, p
     '''
 
     # then we call the previous weight in terms of q
-    return (-1)*weight_evaluator(l, m, u, grad, projection, hessian, rp, tp, pp, rq, tq, pq) # <-- we multiply by -1, taking into account the change of vars
+    return weight_evaluator(l, m, u, grad, projection, hessian, rp, tp, pp, rq, tq, pq) # <-- we multiply by -1, taking into account the change of vars
 
 def np_weight_evaluator_u(l, m, u, grad, projection, hessian, rp, tp, pp, ru, tu, pu):
     # first we change coordinates to q
     rq, tq, pq = change_variables(rp, tp, pp, ru, tu, pu)
     # return the evaluation of the weight
-    return (-1)*weight_evaluator_numpy(l, m, u, grad, projection, hessian, rp, tp, pp, rq, tq, pq)
-
+    return weight_evaluator_numpy(l, m, u, grad, projection, hessian, rp, tp, pp, rq, tq, pq) # note that the negative one has been removed
 
 # main function
 def main():
