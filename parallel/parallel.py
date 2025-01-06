@@ -83,7 +83,7 @@ if __name__ == "__main__":
     n = 3
 
     # where to save result:
-    file_result = '../results/operator_13913.pkl'
+    file_result = '../results/operator_13913_nonegative.pkl'
     
     # results to be stored here
     r = []
