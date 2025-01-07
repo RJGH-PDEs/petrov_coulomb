@@ -109,7 +109,7 @@ def main():
     L = n - 1 # max value l can take?
     tol = 0.03 # tolerance for the nonzeros
 
-    file_name = "../results/operator_13913.pkl"
+    file_name = "../results/operator_13913_nonegative.pkl"
     
     op = load_operator(file_name)   # operator pkl
     nz = non_zeros(op, tol)         # non zeros
@@ -126,7 +126,7 @@ def main():
         print(slice.nnz)
     
     # save it 
-    sparse_name = "sparse_operator_13913.pkl" 
+    sparse_name = "sparse_operator.pkl" 
     save_sparse_op(sparse_name, so)
 
     return 0

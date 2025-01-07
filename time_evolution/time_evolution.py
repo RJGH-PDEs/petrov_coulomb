@@ -4,10 +4,10 @@ from bilinear_operator import landau
 from bilinear_operator import update
 
 # tau
-tau = 0.0000001
+tau = 0.000001
 
 # number of iterations
-NUM_ITERATIONS = 5000000
+NUM_ITERATIONS = 9000
 
 # indicates if the the result is saved
 save = True
@@ -16,7 +16,7 @@ save = True
 with open('mass_inverse.pkl', 'rb') as file:
     # mass inverse
     mi = pickle.load(file)
-with open('../sparse_operator/sparse_operator_13913.pkl', 'rb') as file:
+with open('../sparse_operator/sparse_operator.pkl', 'rb') as file:
     # sparse operator
     so = pickle.load(file)
 

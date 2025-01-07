@@ -2,11 +2,11 @@ import pickle
 import numpy as np
 
 # Loading the older data
-with open('operator_957.pkl', 'rb') as file:
+with open('operator_13913.pkl', 'rb') as file:
     old_computation= pickle.load(file)
 
 # Loading the newer data
-with open('operator_1069.pkl', 'rb') as file:
+with open('operator_13913_nonegative.pkl', 'rb') as file:
     new_computation = pickle.load(file)
 
 # tolerance for the discrepancie
@@ -23,9 +23,11 @@ for slice in old_computation:
     for d in slice:
         # compute the difference
         old = d[2]
-        new = new_computation[i][j][2]
+        new = (-1)*new_computation[i][j][2]
         diff = old - new
-
+        print('old: ', old , ' new: ', new, ' difference: ', diff)
+        difference.append(diff)
+        '''        
         if np.abs(diff) > tol and np.abs(old) > 0.1:
             # compute the percentage difference
             percent = 100*diff/d[2]
@@ -36,13 +38,13 @@ for slice in old_computation:
                 # store it
                 difference.append(percent)
                 count = count + 1
-
+        '''
         j = j + 1
 
     i = i + 1
 
-print("median difference: ", np.median(np.abs(difference)))
-print("number where discrepancie is big: ", count)
+print("max difference: ", np.max(np.abs(difference)))
+# print("number where discrepancie is big: ", count)
 
 '''
 Find the location of the non-zeros

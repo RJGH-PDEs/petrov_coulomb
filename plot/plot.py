@@ -66,14 +66,14 @@ f = np.zeros(n)
 # coeff[9] = -0.6
 
 # open the result
-time = 5000000
+time = 9000
 file_name = "coeff/" + str(time) + ".pkl"
 # file_name = "1.pkl"
 
 with open(file_name, 'rb') as file:
     data = pickle.load(file)
 
-print(data)
+# print(data)
 # counter
 i = 0
 for point in r:
@@ -92,4 +92,4 @@ if save:
     # Save the figure
     figure_name = "./figures/" + str(time) + ".png"
     plt.savefig(figure_name)
-    plt.show()
+    # plt.show()
