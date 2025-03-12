@@ -45,6 +45,44 @@ def non_zeros(operator, tol):
     print('Number of non-zeros: ', len(nz))
     return nz 
 
+# checks sparsity patterns
+def analyse(nz):
+    # counts how many times the rule is broken
+    counter = 0
+
+    # iterate over all non-zeros
+    for e in nz:
+        ######## directional (CAI)
+        m_test  = e[0][2]
+        m_1     = e[1][2]
+        m_2     = e[1][5]
+
+        test    = np.abs(m_test)
+        sum     = np.abs(m_1 + m_2)
+        diff    = np.abs(m_1 - m_2)
+        
+        Caiflag = (test - sum == 0) or (test - diff == 0)
+
+        if not Caiflag:
+            counter = counter + 1
+
+
+        ####### anisotropic (Andrea)
+        ltest  = e[0][1]
+        l1     = e[1][1]
+        l2     = e[1][4]
+        rule = l1 + l2 - ltest
+        m = min(l1, l2)
+
+        Andrea_flag = (rule <= 2*m) and (0 <= rule) and (rule % 2 == 0)
+        print(e, Caiflag, rule ,Andrea_flag)
+
+        if not Andrea_flag:
+            counter = counter + 1
+
+    print('number of times the sparsity rule failed: ', counter)
+    return 19
+    
 # now just one list with simplified indeces
 def simple_index(nz, L):
     sim_ind = []
@@ -113,6 +151,10 @@ def main():
     
     op = load_operator(file_name)   # operator pkl
     nz = non_zeros(op, tol)         # non zeros
+    analyse(nz)
+    # finish here
+    return 0
+
     si = simple_index(nz, L)        # with simple index
     do = dense_op(si, n)            # dense operator
     so = sparse_op(do)              # sparse operator
