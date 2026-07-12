@@ -70,7 +70,12 @@ fig.supylabel(r'$\psi_s$', fontsize=10)
 
 sm = mcm.ScalarMappable(cmap=cmap, norm=norm)
 sm.set_array([])
-fig.colorbar(sm, ax=axes, fraction=0.015, pad=0.02, label='entry value')
+cbar = fig.colorbar(sm, ax=axes, fraction=0.015, pad=0.02, label='entry value')
+# explicit ticks to avoid crowding near zero in the symlog scale
+ticks = [-1e4, -1e2, -1e0, 1e0, 1e2, 1e4]
+cbar.set_ticks(ticks)
+cbar.set_ticklabels([r'$-10^4$', r'$-10^2$', r'$-10^0$',
+                     r'$10^0$',  r'$10^2$',  r'$10^4$'])
 
 fig_path = './figures/sparsity_coulomb.png'
 plt.savefig(fig_path, dpi=150, bbox_inches='tight')
